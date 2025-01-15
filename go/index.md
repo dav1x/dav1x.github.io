@@ -1,16 +1,17 @@
 
-### Varaibles and Simple Data Types
+### Variables and Simple Data Types
 
 #### Pointers
 - Use (value type) values if you want to copy data
-```
+```go
 a := 42
 b := a
 a = 27
 b // 42
 ```
+
 - Use (reference type) pointers if you want to share data
-```
+```go
 a := 42
 b := &a // address of a
 a = 27 // dereference a
@@ -18,12 +19,11 @@ a = 27 // dereference a
 ```
 
 
-```
+```go
 a := foo  // create a string
 b := &a   // address operator returns address of a variable
 *b = "bar" // dereference a pointer with asterick
 c = new(int) // built in "new" function creates a pointer to anonymous variable
-
 ```
 
 ### Data Structures
@@ -32,9 +32,8 @@ c = new(int) // built in "new" function creates a pointer to anonymous variable
 - Array and slice indices start at 0.
 - static data type 
 
-Declaration
-
-```
+Declaration 
+```go
 var arr [3]int // size declared first
 fmt.Println(arr) // [0 0 0] zero value default value
 arr = [3]int{1, 2, 3} //  [1 2 3]
@@ -58,7 +57,7 @@ arr == arr2 // false - arrays are comparable
 
 Declaration and manipulation
 
-```
+```go
 var s []int // size declared first
 fmt.Println(s)
 s = []int{1,2,3}
@@ -86,7 +85,7 @@ s == s2 // compile time error - slices are NOT comparable
 
 #### Maps
 
-```
+```go
 var m map[string]int    // declare a map string key with int value
 fmt.Println(m)          // nil map
 m = map[string]int{"foo":1, "bar":2} // literal map
@@ -125,7 +124,7 @@ Fixed size collection but not limited to a single data type.
 1. Field Name
 2. Field Type
 
-```
+```go
 var s struct {
     name     string
     id       int
@@ -159,7 +158,7 @@ s == s2               // false - since they are value can be compared.
 
 #### If Statements
 
-```
+```go
 if test { ... }
 
 
@@ -184,7 +183,7 @@ if option == "1" {
 
 #### Case Selects
 
-```
+```go
 switch test expression {
   case expression1:
     statements
@@ -213,7 +212,7 @@ switch i {
 
 Loops
 
-```
+```go
 for { ... }                                     // infinite loop
 for condition { ... }                           // loop till condition
 for initializer; test; post clause { ... }      // counter-based loop
