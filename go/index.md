@@ -1,3 +1,4 @@
+## Go Fundamentals Notes
 
 ### Variables and Simple Data Types
 
@@ -208,9 +209,6 @@ switch i {
 
 ### Control Flow: Loops
 
-####
-
-Loops
 
 ```go
 for { ... }                                     // infinite loop
