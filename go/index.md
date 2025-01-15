@@ -1,9 +1,6 @@
 
 ### Varaibles and Simple Data Types
 
-
-### Data Structures
-
 #### Pointers
 - Use (value type) values if you want to copy data
 ```
@@ -28,6 +25,8 @@ b := &a   // address operator returns address of a variable
 c = new(int) // built in "new" function creates a pointer to anonymous variable
 
 ```
+
+### Data Structures
 
 #### Arrays
 - Array and slice indices start at 0.
@@ -156,21 +155,83 @@ fmt.Println(s, s2)    // {"Tricia" 42}{"Arthur" 42}
 s == s2               // false - since they are value can be compared.
 ```
 
-### Branching Constructs
+### Control Flow: Branches
 
 #### If Statements
+
 ```
 if test { ... }
 
 
-if test { ... }
-else { ...}
+if test { ... 
+} else { ...}
 
-if test { ... }
-else if test { ... }
-else { ... }
+if test { ... 
+} else if test { ... 
+} else { ... }
 
 if initializer; test { ... }
 
+
+if option == "1" {
+  fmt.Println("Option 1")
+} else if option == "2" {
+  fmt.Println("Option 2")
+} else {
+  fmt.Println("Option Else")
+}
 ```
+
 #### Case Selects
+
+```
+switch test expression {
+  case expression1:
+    statements
+  case expression2, expression3:
+    statements
+  default:
+    statements
+}
+
+
+i := 5
+switch i {
+  case 1:
+    fmt.Println("First Case")
+  case 2 + 3, 2*i+3:
+    fmt.Println("Second Case")
+  default:
+    fmt.Println("Default Case")
+}
+```
+
+
+### Control Flow: Loops
+
+####
+
+Loops
+
+```
+for { ... }                                     // infinite loop
+for condition { ... }                           // loop till condition
+for initializer; test; post clause { ... }      // counter-based loop
+
+i := 1                                          // infinite loop                              
+for {
+  fmt.Println(i)
+  i += 1
+}
+
+i := 1                                          // loop till condition                             
+for i < 3 {                                     
+  fmt.Println(i)
+  i += 1
+}
+fmt.Println("Done!")
+
+for i:=1;i < 3;i++ {                            // counter-based loop
+  fmt.Println(i)
+}
+```
