@@ -441,7 +441,7 @@ func divide(l, r int) (result int, ok bool) {
 * Demonstration Program Functions
 
 
-![[demo-function.go]]
+![demo-function.go](./demo-function.go#function-demo)
 
 ```go
 package main
