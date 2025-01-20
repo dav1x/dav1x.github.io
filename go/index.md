@@ -210,6 +210,8 @@ switch i {
 ### Control Flow: Loops
 
 
+#### Loops 
+
 ```go
 for { ... }                                     // infinite loop
 for condition { ... }                           // loop till condition
@@ -231,4 +233,207 @@ fmt.Println("Done!")
 for i:=1;i < 3;i++ {                            // counter-based loop
   fmt.Println(i)
 }
+```
+
+
+#### Looping with Collections
+
+- Arrays
+    index, value
+- Slices
+    index, value
+- Maps
+    key, value
+
+```go
+// Options
+for key, value := range collection { ... }
+
+for key := range collection { ... }  // Index NOT value
+
+for _, value := range collection { ... }
+
+
+arr := [3]int{101,102,103}
+for i, v := range arr {
+        fmt.Println(i, v)
+    }
+fmt.Println("Done")
+```
+
+Built Upon Example
+
+```go
+package main
+
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
+func main() {
+
+	type score struct {
+		name  string
+		score int
+	}
+
+	scores := []score{}
+	shouldContinue := true
+
+	for shouldContinue {
+
+		fmt.Println("1) Enter a score")
+		fmt.Println("2) Print Report")
+		fmt.Println("q) Quit")
+		fmt.Println("")
+		fmt.Println("Please select an option")
+
+		var option string
+
+		fmt.Scanln(&option)
+
+		switch option {
+		case "1":
+			fmt.Println("Enter a student name and score")
+			var name, rawScore string
+			fmt.Scanln(&name, &rawScore)
+			s, _ := strconv.Atoi(rawScore)
+			scores = append(scores, score{name: name, score: s})
+		case "2":
+			fmt.Println("Student Scores")
+			fmt.Println(strings.Repeat("-", 14))
+			//fmt.Println(scores)
+			for _, s := range scores {
+				fmt.Println(s.name, s.score)
+			}
+			fmt.Println("")
+		default:
+			//exit loop
+			shouldContinue = false
+		}
+
+	}
+}
+
+```
+
+### Functions
+
+- Function Signature
+
+
+func functionName (parameters)(return values) {
+
+    function body
+}
+
+```go
+func greet(name string) {
+    fmt.Println(name)
+}
+
+func greet(name1 string, name2 string) {
+    fmt.Println(name1)
+    fmt.Println(name2)
+}
+```
+
+- Variadic Parameters
+
+```go
+// receive 0 or more group into a single variable named.. names
+// received as a slice
+// varies how the caller evokes the function
+// Must be final parameter
+
+
+func greet(names ...string) {
+    for _, n := range names {
+        fmt.Println(n)
+  }
+}
+```
+
+- Passing Values and Pointers
+
+```go
+
+func main() {
+    name, otherName := "Name", "Other name"
+    fmt.Println(name)                       // Name
+    fmt.Println(otherName)                  // Other name
+    myFunc(name, &otherName)                // Does NOT update the pass by value, but does update the pass by reference
+    fmt.Println(name)                       // Name
+    fmt.Println(otherName)                  // Other new name
+}
+
+func myFunc(name string, otherName *string) {
+    name = "New name"
+    *otherName = "Other new name"
+}
+
+```
+
+- Return Values
+
+func functionName (parameters)(**return values**) {
+    function body
+}
+
+* Returning SIngle Value
+
+```go
+
+func main() {
+  result := add(1, 2)
+  fmt.Println(result) // 3
+
+}
+
+func add(l, r int) int {
+  return l + r
+}
+```
+
+* Returning Multiple Values
+
+```go
+
+func main() {
+  result, ok := divide(1,2)
+  if ok {
+    fmt.Println(result)
+  }
+}
+
+func divide(l, r int) (int, bool) { // return int and bool
+  if r == 0 {
+    return 0, false
+  }
+  return l/r, true
+}
+
+```
+
+* Named Return Values
+
+```go
+func main() {
+  result, ok := divide(1,2)
+  if ok {
+    fmt.Println(result)
+  }
+}
+
+func divide(l, r int) (result int, ok bool) { 
+  if r == 0 {
+    return                                    // 0, false
+  }
+  result = l/r 
+  ok = true
+  return                                      // optional: return l/r, true
+}
+
 ```
