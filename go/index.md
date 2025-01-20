@@ -441,6 +441,8 @@ func divide(l, r int) (result int, ok bool) {
 * Demonstration Program Functions
 
 
+[embedmd]:# (demo-function.go)
+
 ![demo-function.go](./demo-function.go#function-demo)
 
 ```go
@@ -476,12 +478,12 @@ func main() {
 
 		switch option {
 		case "1":
-			scores = append(scores, addStudent())
+		  scores = append(scores, addStudent())
 		case "2":
-      printReport(scores) 
+          printReport(scores) 
 		default:
 			//exit loop
-			shouldContinue = false
+		  shouldContinue = false
 		}
 
 	}
