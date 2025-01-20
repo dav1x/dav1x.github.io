@@ -261,7 +261,7 @@ for i, v := range arr {
 fmt.Println("Done")
 ```
 
-Built Upon Example
+* Demonstration Program looping with collections
 
 ```go
 package main
@@ -382,7 +382,7 @@ func functionName (parameters)(**return values**) {
     function body
 }
 
-* Returning SIngle Value
+* Returning Single Value
 
 ```go
 
@@ -436,4 +436,74 @@ func divide(l, r int) (result int, ok bool) {
   return                                      // optional: return l/r, true
 }
 
+```
+
+* Demonstration Program Functions
+
+
+![[demo-function.go]]
+
+```go
+package main
+
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+	
+type score struct {
+  name  string
+  score int
+}
+
+func main() {
+
+	scores := []score{}
+	shouldContinue := true
+
+	for shouldContinue {
+
+		fmt.Println("1) Enter a score")
+		fmt.Println("2) Print Report")
+		fmt.Println("q) Quit")
+		fmt.Println("")
+		fmt.Println("Please select an option")
+
+		var option string
+
+		fmt.Scanln(&option)
+
+		switch option {
+		case "1":
+			scores = append(scores, addStudent())
+		case "2":
+      printReport(scores) 
+		default:
+			//exit loop
+			shouldContinue = false
+		}
+
+	}
+}
+func addStudent() score {
+
+  fmt.Println("Enter a student name and score")
+  var name, rawScore string
+  fmt.Scanln(&name, &rawScore)
+  s, _ := strconv.Atoi(rawScore)
+  return score{name: name, score: s}
+
+}
+
+func printReport(scores []score) {
+
+  fmt.Println("Student Scores")
+  fmt.Println(strings.Repeat("-", 14))
+  //fmt.Println(scores)
+  for _, s := range scores {
+    fmt.Println(s.name, s.score)
+  }
+  fmt.Println("")
+} 
 ```
