@@ -1,5 +1,31 @@
 ## Go Fundamentals Notes
 
+[Variables and Simply Data Types](#variables-and-simple-data-types)
+
+[Pointers](#pointers)
+
+[Data Structures](#data-structures)
+
+[Arrays](#arrays)
+
+[Slices](#slices)
+
+[Maps](#maps)
+
+[Structs](#struct)
+
+[Control Flow Branches](#control-flow-branches)
+
+[If Statements](#if-statements)
+
+[Case Selects](#case-selects)
+
+[Control Flow Loops](#control-flow-loops)
+
+[Loops](#loops)
+
+[Looping With Collections](#looping-with-collections)
+
 ### Variables and Simple Data Types
 
 #### Pointers
@@ -261,7 +287,7 @@ for i, v := range arr {
 fmt.Println("Done")
 ```
 
-* Demonstration Program looping with collections
+##### Demonstration Program looping with collections
 
 ```go
 package main
@@ -340,7 +366,7 @@ func greet(name1 string, name2 string) {
 }
 ```
 
-- Variadic Parameters
+#### Variadic Parameters
 
 ```go
 // receive 0 or more group into a single variable named.. names
@@ -356,7 +382,7 @@ func greet(names ...string) {
 }
 ```
 
-- Passing Values and Pointers
+#### Passing Values and Pointers
 
 ```go
 
@@ -376,7 +402,7 @@ func myFunc(name string, otherName *string) {
 
 ```
 
-- Return Values
+#### Return Values
 
 func functionName (parameters)(**return values**) {
     function body
@@ -417,7 +443,7 @@ func divide(l, r int) (int, bool) { // return int and bool
 
 ```
 
-* Named Return Values
+#### Named Return Values
 
 ```go
 func main() {
@@ -438,12 +464,7 @@ func divide(l, r int) (result int, ok bool) {
 
 ```
 
-* Demonstration Program Functions
-
-
-[embedmd]:# (demo-function.go)
-
-![demo-function.go](./demo-function.go#function-demo)
+##### Demonstration Program Functions
 
 ```go
 package main
