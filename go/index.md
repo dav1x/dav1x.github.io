@@ -1,57 +1,187 @@
 ## Go Fundamentals Notes
 
-[Variables and Simply Data Types](#variables-and-simple-data-types)
+[Variables and Simply Data Types](#variables-and-simple-data-types) 
 
-[Pointers](#pointers)
+1. [Strings](#strings)
 
-[Data Structures](#data-structures)
+2. [Numbers](#numbers)
 
-[Arrays](#arrays)
+3. [Booleans](#booleans)
 
-[Slices](#slices)
+4. [Errors](#errors)
 
-[Maps](#maps)
+5. [Constants](#constants)
 
-[Structs](#struct)
+6. [Demo code with Variables](#demo-code-with-variables)
 
-[Control Flow Branches](#control-flow-branches)
+6. [Pointers](#pointers)
 
-[If Statements](#if-statements)
+[Data Structures](#data-structures) 
 
-[Case Selects](#case-selects)
+1. [Arrays](#arrays)
 
-[Control Flow Loops](#control-flow-loops)
+2. [Slices](#slices)
 
-[Loops](#loops)
+3. [Maps](#maps)
 
-[Looping With Collections](#looping-with-collections)
+4. [Structs](#struct)
+
+[Control Flow Branches](#control-flow-branches) 
+
+1. [If Statements](#if-statements)
+
+2. [Case Selects](#case-selects)
+
+[Control Flow Loops](#control-flow-loops) 
+
+1. [Loops](#loops)
+
+2. [Looping With Collections](#looping-with-collections)
 
 ### Variables and Simple Data Types
 
+#### Strings
+
+```go
+    "this is a string"              // interpreted string
+    `this is also a string`         // raw string
+    "this is an escape character \n it creates a new line"
+
+    // this is an escape character:
+    //  it creates a newline
+
+    `this is an escape character: \n it creates a newline`
+    // this is an escape character: \n it creates a newline <- not honored without double quotes
+
+    `raw strings 
+    ignore new lines`
+ 
+```
+
+#### Numbers
+
+```go
+
+
+    var int num                     // int 99, 0, -937
+    var uint num2                   // 0, 15, 8001
+    
+
+    /*
+    int  int8  int16  int32  int64
+    uint uint8 uint16 uint32 uint64 uintptr
+
+    byte                            // alias for uint8
+
+    rune                            // alias for int32
+                                    // represents a Unicode code point
+
+    float32 float64
+
+    complex64 complex128
+    */
+```
+
+#### Booleans
+
+```go
+                                    // no aliases for numbers in GO 
+                                    // first class variables
+                                    // no truthy or falsy
+    true                            
+    false                           
+
+```
+
+#### Errors
+
+```go
+                                    // no exceptions in GO
+                                    // first class variable
+                                    // return errors when things go wrong
+                                    // otherwise nil
+                                    // if numbers != nil
+type error interface {
+    Error() string
+}
+
+```
+
+#### Declaring Variables
+
+```go
+                                    // 0 value if not defined.
+                                    // "" for string 
+                                    // 0 for numbers 
+                                    // false for bool
+    var myName string               // declare variable  
+    var myName string = "Mike"      // declare variable and initialize
+    var myName = "Mike"             // initialize with inferred type
+    myName := "Mike"                // short declaration syntax
+
+```
+
+#### Constants
+
+```go
+
+    const a = 42                    // declare constant implicitly typed isnt actually given a type
+    const b string = "hello, world" // declare constant explicitly typed is given a type
+    const c = a                     // declare constant implicitly typed isnt actually given a type
+    const (                         // declare multiple constants
+        d = true
+        e = 3.14
+    )
+    const d = 2 * 5                 // constant expression = 10
+    const e = "hello, "+"world"     // must be calcuable at compile time
+    const f = someFunction()        // this would NOT be valid
+```
+
+#### Demo code with Variables
+
+```go
+
+package main
+
+import "fmt"
+
+func main() {
+
+    name, score := "Dent, Arthur", 87
+    fmt.Println("Student Scores")
+    fmt.Println(strings.Repeat("-", 14))
+    fmt.Println(name, score)
+}
+```
+
 #### Pointers
 - Use (value type) values if you want to copy data
+
 ```go
 a := 42
 b := a
 a = 27
-b // 42
+b                       // 42
 ```
 
 - Use (reference type) pointers if you want to share data
+
 ```go
 a := 42
-b := &a // address of a
-a = 27 // dereference a
-*b // 27
+b := &a                 // address of a
+a = 27                  // dereference a
+*b                      // 27
 ```
 
 
 ```go
-a := foo  // create a string
-b := &a   // address operator returns address of a variable
-*b = "bar" // dereference a pointer with asterick
-c = new(int) // built in "new" function creates a pointer to anonymous variable
+a := foo                // create a string
+b := &a                 // address operator returns address of a variable
+*b = "bar"              // dereference a pointer with asterick
+c = new(int)            // built in "new" function creates a pointer to anonymous variable
 ```
+
+[Top](#go-fundamentals-notes)
 
 ### Data Structures
 
@@ -61,20 +191,20 @@ c = new(int) // built in "new" function creates a pointer to anonymous variable
 
 Declaration 
 ```go
-var arr [3]int // size declared first
-fmt.Println(arr) // [0 0 0] zero value default value
-arr = [3]int{1, 2, 3} //  [1 2 3]
+var arr [3]int          // size declared first
+fmt.Println(arr)        // [0 0 0] zero value default value
+arr = [3]int{1, 2, 3}   //  [1 2 3]
 arr[1] = 99
-fmt.Println(arr) // [1 99 3]
-fmt.Println(len(arr)) // 3 
+fmt.Println(arr)        // [1 99 3]
+fmt.Println(len(arr))   // 3 
 
 arr := [3]string{"foo", "bar", "baz"}
 arr2 := arr
 fmt.Println(arr2)
 arr[0] = "quux"
-fmt.Println(arr) // {"quux", "bar", "baz"}
-fmt.Println(arr2) // {"foo", "bar", "baz"}
-arr == arr2 // false - arrays are comparable
+fmt.Println(arr)        // {"quux", "bar", "baz"}
+fmt.Println(arr2)       // {"foo", "bar", "baz"}
+arr == arr2             // false - arrays are comparable
 
 ```
 
@@ -85,29 +215,29 @@ arr == arr2 // false - arrays are comparable
 Declaration and manipulation
 
 ```go
-var s []int // size declared first
+var s []int             // size declared first
 fmt.Println(s)
 s = []int{1,2,3}
-fmt.Println(s[1]) // 2
+fmt.Println(s[1])       // 2
 s[1] = 99
-fmt.Println(s) // [1 99 3]
+fmt.Println(s)          // [1 99 3]
 
-s = append(s, 5, 10, 15) // add elements to the slice
-fmt.Println(s) // 1 99 3 5 10 15 
+s = append(s, 5, 10, 15)// add elements to the slice
+fmt.Println(s)          // 1 99 3 5 10 15 
 
 // Delete function requires slices stdlib remove ekements by index specificied
 s = slices.Delete(s, 1, 3)
-fmt.Println(2) // 1 5 10 15 
+fmt.Println(2)          // 1 5 10 15 
 
 s := []string{"foo", "bar", "baz"}
-s2 := s  // slices are copied by reference
-         // use slices.Clone to copy by value
+s2 := s                 // slices are copied by reference
+                        // use slices.Clone to copy by value
 s[0], s2[2] = "qux", "fred"
-fmt.Println(s, s2) //  ["qux", "bar", "fred"] ["qux", "bar", "fred"]
-                   // data is shared
-s == s2 // compile time error - slices are NOT comparable
-        // use Slices
-```
+fmt.Println(s, s2)      //  ["qux", "bar", "fred"] ["qux", "bar", "fred"]
+                        // data is shared
+s == s2                 // compile time error - slices are NOT comparable
+                        // use Slices
+``` 
 
 
 #### Maps
@@ -122,7 +252,7 @@ m["bar"] = 99           // update value using same syntax
 delete(m, "foo")        // remove entry from map
 m["baz"] = 418          // add new value to map
 fmt.Println(m)          // map[bar:99 baz:418]
-fmt.Println(m["foo])    // returns 0 for unknown key
+fmt.Println(m["foo"])    // returns 0 for unknown key
 v, ok := m["foo"]       // comma okay syntax verified presence (T if present F if not)
 fmt.Println(v, ok)      // 0, false
 
@@ -181,6 +311,8 @@ fmt.Println(s, s2)    // {"Tricia" 42}{"Arthur" 42}
 s == s2               // false - since they are value can be compared.
 ```
 
+[Top](#go-fundamentals-notes)
+
 ### Control Flow: Branches
 
 #### If Statements
@@ -232,6 +364,7 @@ switch i {
 }
 ```
 
+[Top](#go-fundamentals-notes)
 
 ### Control Flow: Loops
 
@@ -286,6 +419,8 @@ for i, v := range arr {
     }
 fmt.Println("Done")
 ```
+
+[Top](#go-fundamentals-notes)
 
 ##### Demonstration Program looping with collections
 
@@ -344,6 +479,8 @@ func main() {
 }
 
 ```
+
+[Top](#go-fundamentals-notes)
 
 ### Functions
 
@@ -530,3 +667,5 @@ func printReport(scores []score) {
   fmt.Println("")
 } 
 ```
+
+[Top](#go-fundamentals-notes)
